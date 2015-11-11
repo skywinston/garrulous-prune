@@ -166,17 +166,20 @@ label {
   &:first-child {
     margin-top: 24px;
   }
-  h2{
-    margin: 0px 0px 8px 0px;
-    color: #9E9E9E;
-    font-size: 32px;
-    font-weight: 300;
-  }
   .post-image {
     width: 200px;
     height: 150px;
     margin: 0px 16px;
-    border-radius: 4px;
+  }
+  .post-position{
+    margin: 0px 0px 8px 0px;
+    color: #9E9E9E;
+    font-size: 24px;
+    font-weight: 300;
+  }
+  h2 {
+    margin-top: 0px;
+    margin-bottom: 16px;
   }
   p {
     font-size: 14px;

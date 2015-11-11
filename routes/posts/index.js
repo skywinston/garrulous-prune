@@ -6,12 +6,14 @@ var posts = db.get('posts');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   posts.find({}).then(function(posts){
+    console.log(posts);
     res.json(posts);
   });
 });
 
 router.post('/', function(req, res, next){
   posts.insert(req.body).then(function(post){
+    console.log("Post inserted into db: ", post);
     res.json(post)
   });
 })

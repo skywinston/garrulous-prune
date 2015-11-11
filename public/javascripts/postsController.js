@@ -1,4 +1,13 @@
-var app = angular.module('redditClone', ['ngAnimate']);
+var app = angular.module('redditClone', ['ngAnimate', 'ui.router']);
+// app.config(function($stateProvider, $urlRouterProvider){
+//   $urlRouterProvider.otherwise('/posts');
+//   $stateProvider
+//   .state('posts', {
+//     url: '/posts',
+//     templateUrl: 'partials/posts.html'
+//   });
+// });
+
 app.controller('postsController', function($scope, $http){
   $http.get('/api/1/posts').then(function(response){
     $scope.posts = response.data;
@@ -6,6 +15,7 @@ app.controller('postsController', function($scope, $http){
     //   post.date = moment(post.date).fromNow();
     // });
   });
+});
 
   $scope.newPost = {
     visible: false,

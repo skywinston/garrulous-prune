@@ -6,21 +6,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="stylesheets/style.css" media="screen" title="no title" charset="utf-8">
     <meta charset="utf-8">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.1/angular-animate.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.1/angular-animate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
     <script src="./javascripts/postsController.js" charset="utf-8"></script>
-    <title>Derrit</title>
+    <title>Reddit Clone</title>
+    <base href="/"/>
   </head>
   <body ng-controller="postsController">
     <div class="appnav">
       <h3 class="logo">Shreddit</h3>
       <button type="button" name="button" ng-click="newPostForm()"><i class="material-icons">add</i>New Post</button>
-      <!-- <select name="" ng-model="sortBy">
-        <option value="votes">Votes</option>
-        <option value="date">Date</option>
-        <option value="author">Author</option>
-      </select> -->
     </div>
     <div class="container flex-col">
       <form id='newPost' class="flex-col centered animated" action="index.html" method="post" ng-show="newPost.visible" ng-class="{'fadeInDown': newPost.visible, 'fadeOutUp':!newPost.visible}">
@@ -48,11 +45,11 @@
       </form>
       <div id="allPosts" class="flex-col center">
         <div class="post flex-row center" ng-repeat="post in posts | orderBy:'-votes'">
-          <h2>{{post.position}}</h2>
+          <h3 class='post-position'>{{post.position}}</h3>
           <div id="vote-buttons" class="flex-col center">
-            <i class="material-icons" ng-click="upvote(post)" data-id="{{post._id}}">keyboard_arrow_up</i>
+            <i class="material-icons" ng-click="upvote(post)">keyboard_arrow_up</i>
             <h3 ng-class="{'text-success': post.votes > 0, 'text-danger': post.votes < 0}">{{post.votes}}</h3>
-            <i class="material-icons" ng-click="downvote(post)" data-id="{{post._id}}">keyboard_arrow_down</i>
+            <i class="material-icons" ng-click="downvote(post)">keyboard_arrow_down</i>
           </div>
           <div class='post-image' style="background: url({{post.imageURL}}) no-repeat center top; background-size: cover" alt=""></div>
           <div class="flex-col stretch">

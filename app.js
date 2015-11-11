@@ -4,8 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var bcrypt = require('bcrypt');
+var cookieSession = require('cookie-session');
+var db = require('monk')('localhost/reddit-clone');
 
-var posts = require('./routes/posts');
+var posts = require('./routes/posts/index');
+var routes = require('./routes/index');
 
 var app = express();
 
@@ -19,8 +23,13 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cookieSession({
+  name: 'session',
+  keys: ['keyboardCat', 'luminousDomePiece']
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', routes);
 app.use('/api/1/posts', posts);
 
 // catch 404 and forward to error handler

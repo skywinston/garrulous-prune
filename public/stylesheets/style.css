@@ -113,16 +113,18 @@ label {
   margin-bottom: 16px; }
   .post:first-child {
     margin-top: 24px; }
-  .post h2 {
-    margin: 0px 0px 8px 0px;
-    color: #9E9E9E;
-    font-size: 32px;
-    font-weight: 300; }
   .post .post-image {
     width: 200px;
     height: 150px;
-    margin: 0px 16px;
-    border-radius: 4px; }
+    margin: 0px 16px; }
+  .post .post-position {
+    margin: 0px 0px 8px 0px;
+    color: #9E9E9E;
+    font-size: 24px;
+    font-weight: 300; }
+  .post h2 {
+    margin-top: 0px;
+    margin-bottom: 16px; }
   .post p {
     font-size: 14px;
     color: #757575; }
