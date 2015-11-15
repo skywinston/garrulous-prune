@@ -63,14 +63,23 @@
                 <button ng-hide="post.newComment.visible" ng-click="newCommentForm(post.newComment)" class="theme-primary" type="button" name="addComment">Add Comment</button>
                 <button ng-show="post.newComment.visible" ng-click="cancelComment(post.newComment)" class="theme-danger" type="button" name="cancelComment">Cancel Comment</button>
                 <i class="material-icons md-18 md-dark">comment</i>
-                <span ng-click="showComments()" class="flex-row center" style="cursor: pointer">
-                  <small count="{{post.comments.length}}" when="{'0': 'No Comments', '1': '1 Comment', 'other': '{{post.comments.length}} Comments'}">{{post.comments.length}}</small>
-                  <i class="material-icons">arrow_drop_down</i>
+                <span ng-click="post.commentsVisible = !post.commentsVisible" class="flex-row center" style="cursor: pointer">
+                  <small><ng-pluralize count="post.comments.length" when="{'0': 'No Comments', '1': '1 Comment', 'other': '{{post.comments.length}} Comments'}"><ng-pluralize></small>
+                  <i class="material-icons" ng-hide="post.commentsVisible">arrow_drop_down</i>
+                  <i class="material-icons" ng-show="post.commentsVisible">arrow_drop_up</i>
                 </span>
               </div>
             </div>
           </div>
-          <form class="commentCard centered" ng-class="{'fadeInDown': newComment.visible, 'fadeOutUp': !newComment.visible}" ng-show="post.newComment.visible" id="newComment" ng-submit="postComment(post)">
+          <div class="allComments flex-col">
+            <div class="comment" ng-repeat="comment in post.comments" ng-show="post.commentsVisible" ng-hide="!posts.commentsVisible">
+              <h5>{{comment.author}} <span class="text-secondary">on {{comment.date}}</span></h5>
+              <p>
+                {{comment.content}}
+              </p>
+            </div>
+          </div>
+          <form class="commentCard centered" ng-class="{'fadeInDown': post.newComment.visible, 'fadeOutUp': !post.newComment.visible}" ng-show="post.newComment.visible" id="newComment" ng-submit="postComment(post)">
             <label for="">Author</label>
             <input type="text" name="author" value="" ng-model="post.newComment.author">
             <label for="">Comment</label>

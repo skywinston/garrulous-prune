@@ -22,7 +22,8 @@ app.controller('postsController', function($scope, $http){
       author: '',
       content: ''
     },
-    comments: []
+    comments: [],
+    commentsVisible: false
   };
 
   var commentTemplate = {
@@ -40,7 +41,8 @@ app.controller('postsController', function($scope, $http){
       author: '',
       content: ''
     },
-    comments: []
+    comments: [],
+    commentsVisible: false
   };
 
   $scope.posts = [];
@@ -86,16 +88,20 @@ app.controller('postsController', function($scope, $http){
   }
 
   $scope.downvote = function(clickedPost){
-    $scope.posts.forEach(function(post){
-      if(post._id === clickedPost._id){
-        post.votes--;
-        $http.post('/api/1/posts/'+clickedPost._id+'/update', clickedPost).then(function(response){
-          if(response.data !== 1){
-            throw new Error('DB update failed!');
-          }
-        });
+    console.log("before downvote:", clickedPost);
+    clickedPost.votes--;
+    console.log("after downvote:", clickedPost);
+    console.log(clickedPost.votes);
+    $http.post('/api/1/posts/'+clickedPost._id+'/update', clickedPost).then(function(response){
+      if(response.data !== 1){
+        throw new Error('DB update failed!');
       }
     });
+    // $scope.posts.forEach(function(post){
+    //   if(post._id === clickedPost._id){
+    //     post.votes--;
+    //   }
+    // });
   }
 
   $scope.newCommentForm = function(newComment){
