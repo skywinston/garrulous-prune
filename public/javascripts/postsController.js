@@ -49,7 +49,7 @@ app.controller('postsController', function($scope, $http){
 
   $scope.posts = [];
 
-  $scope.newPostForm = function(){
+  $scope.providePostForm = function(){
     $scope.newPost.visible = true;
     document.getElementById('title').focus();
   }
@@ -60,6 +60,11 @@ app.controller('postsController', function($scope, $http){
   }
 
   $scope.createPost = function(newPost){
+    if($scope.newPost.$valid){
+      console.log("Valid!");
+    } else {
+      console.log("Not valid!");
+    }
     console.log(newPost);
     $scope.newPost.date = moment();
     $http.post('/api/1/posts', newPost).then(function(response){

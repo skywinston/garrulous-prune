@@ -275,6 +275,9 @@ input {
   &:focus {
     border-bottom: 2px solid $derritBlue;
   }
+  &.text-danger {
+    border-bottom: 2px solid #D50000;
+  }
 }
 
 textarea {
@@ -329,7 +332,7 @@ select {
   padding: 0px;
 }
 
-#newPost {
+#newPostForm {
   @include pamphlet;
   margin-top: 24px;
   h1 {

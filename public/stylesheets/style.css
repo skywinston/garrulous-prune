@@ -217,6 +217,8 @@ input {
   width: 512px; }
   input:focus {
     border-bottom: 2px solid #03a9f4; }
+  input.text-danger {
+    border-bottom: 2px solid #D50000; }
 
 textarea {
   box-sizing: border-box;
@@ -264,18 +266,18 @@ select {
   background-color: whitesmoke;
   padding: 0px; }
 
-#newPost {
+#newPostForm {
   background-color: #fafafa;
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   padding: 16px;
   padding: 32px;
   margin-top: 24px; }
-  #newPost h1 {
+  #newPostForm h1 {
     text-align: right;
     margin-top: 0px;
     margin-bottom: .75rem; }
-  #newPost button {
+  #newPostForm button {
     margin-top: 16px; }
 
 .commentNav {
