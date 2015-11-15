@@ -134,12 +134,8 @@
             >Create Post
           </button>
         </div>
+      </form> <!-- new post form END -->
 
-          <!-- For debugging form validation -->
-          <pre>
-            {{ newPostForm | json}}
-          </pre>
-      </form>
       <div id="allPosts" class="flex-col center">
         <div ng-repeat="post in posts | orderBy: sortMethod">
           <div class="post flex-row center">

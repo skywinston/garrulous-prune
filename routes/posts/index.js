@@ -14,6 +14,7 @@ router.get('/', function(req, res, next) {
     var promises = posts.map(function (post) {
       return comments.find({ 'post_id': post._id.toString() }).then(function(comments){
         comments.forEach(function(comment){
+          comment.date = moment(comment.date).fromNow();
           post.comments.push(comment);
         });
         post.date = moment(post.date).fromNow();
