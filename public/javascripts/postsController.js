@@ -32,6 +32,8 @@ app.controller('postsController', function($scope, $http){
     content: ''
   };
 
+  $scope.sortMethod = '-votes';
+
   $scope.newPost = {
     visible: false,
     position: 0,
@@ -61,6 +63,7 @@ app.controller('postsController', function($scope, $http){
     console.log(newPost);
     $scope.newPost.date = moment();
     $http.post('/api/1/posts', newPost).then(function(response){
+      response.data.date = moment(response.data.date).fromNow();
       $scope.posts.push(response.data);
       $scope.newPost = {
         visible: false,
