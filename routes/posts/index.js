@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('monk')('localhost/reddit-clone');
 var posts = db.get('posts');
+var comments = db.get('comments');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

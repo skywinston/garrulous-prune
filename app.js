@@ -9,6 +9,7 @@ var cookieSession = require('cookie-session');
 var db = require('monk')('localhost/reddit-clone');
 
 var posts = require('./routes/posts');
+var comments = require('./routes/comments');
 // var routes = require('./routes/index');
 
 var app = express();
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', routes);
 app.use('/api/1/posts', posts);
+app.use('api/1/comments', comments);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

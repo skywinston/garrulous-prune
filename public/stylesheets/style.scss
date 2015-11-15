@@ -31,6 +31,11 @@ $warning: #FF9800;
   color: #424242;
 }
 
+.theme-danger {
+  background-color: #D50000;
+  color: white;
+}
+
 .text-danger {
   color: #D50000;
 }
@@ -38,6 +43,17 @@ $warning: #FF9800;
 .text-success {
   color: #4CAF50;
 }
+
+// Icons
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
 // Standard Elements
 
@@ -163,6 +179,8 @@ label {
   @include card;
   width: 768px;
   margin-bottom: 16px;
+  position: relative;
+  z-index: 4;
   &:first-child {
     margin-top: 24px;
   }
@@ -185,6 +203,15 @@ label {
     font-size: 14px;
     color: #757575;
   }
+}
+
+.commentCard {
+  @include pamphlet;
+  width: 512px;
+  margin: -24px auto 0px auto;
+  position: relative;
+  z-index: 2;
+  align-self: center;
 }
 
 

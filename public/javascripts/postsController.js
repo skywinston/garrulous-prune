@@ -70,4 +70,26 @@ app.controller('postsController', function($scope, $http){
     });
   }
 
+  $scope.newComment = {
+    visible: false,
+    author: '',
+    comment: ''
+  }
+
+  $scope.newCommentForm = function(){
+    $scope.newComment.visible = true;
+
+  }
+
+  $scope.cancelComment = function () {
+    $scope.newComment.visible = false;
+  }
+
+  $scope.postComment = function(newComment){
+    $scope.newComment.date = moment();
+    $http.post('/api/1/comments', newComment).then(function(response){
+      console.log(response);
+    })
+  }
+
 });
