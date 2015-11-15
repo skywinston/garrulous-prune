@@ -8,8 +8,8 @@ var bcrypt = require('bcrypt');
 var cookieSession = require('cookie-session');
 var db = require('monk')('localhost/reddit-clone');
 
-var posts = require('./routes/posts/index');
-var routes = require('./routes/index');
+var posts = require('./routes/posts');
+// var routes = require('./routes/index');
 
 var app = express();
 
@@ -29,7 +29,7 @@ app.use(cookieSession({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+// app.use('/', routes);
 app.use('/api/1/posts', posts);
 
 // catch 404 and forward to error handler

@@ -44,7 +44,7 @@ $warning: #FF9800;
 body {
   display: flex;
   flex-flow: column;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #212121;
   margin: 0px;
   padding: 0px;
@@ -124,7 +124,7 @@ label {
 .appnav > button {
   flex-flow: row;
   align-items: center;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #FAFAFA;
   display: flex;
   border: 1px solid #0288D1;
@@ -208,7 +208,7 @@ label {
 // Forms & Inputs
 
 input {
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   display: block;
   box-sizing: border-box;
@@ -225,7 +225,7 @@ input {
 
 textarea {
   box-sizing: border-box;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   display: block;
   border: none;
@@ -242,13 +242,13 @@ textarea {
 
 button {
   @include card;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   border: none;
   outline: none;
   background-color: $derritBlue;
   color: white;
-  width: 128px;
+  padding: 8px 16px;
 }
 
 select {
@@ -256,7 +256,7 @@ select {
   margin-left: 24px;
 }
 
-// IDs
+// Unique Elements
 
 #newPost {
   @include pamphlet;
@@ -268,6 +268,17 @@ select {
   }
   button {
     margin-top: 16px;
+  }
+}
+
+.commentNav {
+  margin-top: auto;
+  transition: all .3s;
+  button {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-right: 16px;
   }
 }
 

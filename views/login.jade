@@ -1,0 +1,15 @@
+extends layout
+block content
+  .flex-col.centered.center
+    if (errors)
+      .alert.alert-danger
+        for error in errors
+          p= error
+    form(id="login" action="/login" method="POST")
+          label(for='username') Username
+          input(id="username" type="text" name="username" placeholder="Please enter a username")
+          label(for='password') Password
+          input(id="password" type="password" placeholder="Please enter your password" name="password")
+          input.btn.btn-primary(type="submit" value="Login")
+    | Not a user yet? <a href='register'>Register</a>
+      

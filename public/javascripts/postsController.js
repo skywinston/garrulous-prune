@@ -1,4 +1,4 @@
-var app = angular.module('redditClone', ['ngAnimate', 'ui.router']);
+var app = angular.module('redditClone', ['ngAnimate']);
 // app.config(function($stateProvider, $urlRouterProvider){
 //   $urlRouterProvider.otherwise('/posts');
 //   $stateProvider
@@ -10,17 +10,15 @@ var app = angular.module('redditClone', ['ngAnimate', 'ui.router']);
 
 app.controller('postsController', function($scope, $http){
   $http.get('/api/1/posts').then(function(response){
+    console.log(response.data);
     $scope.posts = response.data;
-    // $scope.posts = response.data.map(function(post){
-    //   post.date = moment(post.date).fromNow();
-    // });
   });
-});
 
   $scope.newPost = {
     visible: false,
     position: 0,
     votes: 0,
+    comments: []
   };
 
   $scope.posts = [];
@@ -39,7 +37,6 @@ app.controller('postsController', function($scope, $http){
     console.log(newPost);
     $scope.newPost.date = moment();
     $http.post('/api/1/posts', newPost).then(function(response){
-      // $scope.newPost.date = moment(response.data.date);
       $scope.posts.push(response.data);
       $scope.newPost = {
         visible: false,

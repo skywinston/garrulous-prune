@@ -1,0 +1,16 @@
+extends layout
+block content
+  .flex-col.centered.center
+    if errors
+      .alert.alert-danger
+        for error in errors
+          p= error
+    form(id="register" action="/register" method="POST")
+        label(for='username') Username
+        input(id="username" type="text" name="username" placeholder="Please enter your username address")
+        label(for='password') Password
+        input(id="password" type="password" placeholder="Please enter your password" name="password")
+        label(for='passwordConfirm') Confirm Password
+        input(id="passwordConfirm" type="password" placeholder="Confirm your password" name="passwordConfirm")
+        input.btn.btn-primary(type="submit" value="Register")
+    | Already a user?  <a href='/login'>Login Here</a>
