@@ -141,7 +141,7 @@ label {
   margin-bottom: 16px;
   position: relative;
   z-index: 4; }
-  .post:first-child {
+  .post:nth-child(0) {
     margin-top: 24px; }
   .post .post-image {
     width: 200px;
@@ -230,6 +230,9 @@ button {
 select {
   width: 128px;
   margin-left: 24px; }
+
+#allPosts {
+  margin-top: 24px; }
 
 #newPost {
   background-color: #fafafa;

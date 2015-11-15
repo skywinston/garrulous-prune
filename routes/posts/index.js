@@ -6,9 +6,25 @@ var comments = db.get('comments');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  var postsPresenter = {
+    posts: []
+  }
   posts.find({}).then(function(posts){
-    console.log(posts);
     res.json(posts);
+
+    // This whole promise chain needs work in a major way.
+    var promises = posts.map(function (post) {
+      return comments.find({'post_id':post}).then(function(comments){
+        comments.forEach(function(comment){
+          post.comments.push(comment);
+          postsPresenter.posts.push(post);
+        });
+      });
+    });
+    return Promise.all(promises);
+  }).then(function(posts){
+    console.log("Logging posts:", posts);
+    // res.json(posts); // <-- Currently undefined
   });
 });
 

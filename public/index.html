@@ -60,8 +60,8 @@
                 {{post.description}}
               </p>
               <div class="flex-row center commentNav">
-                <button ng-hide="newComment.visible" ng-click="newCommentForm()" class="theme-primary" type="button" name="addComment">Add Comment</button>
-                <button ng-show="newComment.visible" ng-click="cancelComment()" class="theme-danger" type="button" name="cancelComment">Cancel Comment</button>
+                <button ng-hide="post.newComment.visible" ng-click="newCommentForm(post.newComment)" class="theme-primary" type="button" name="addComment">Add Comment</button>
+                <button ng-show="post.newComment.visible" ng-click="cancelComment(post.newComment)" class="theme-danger" type="button" name="cancelComment">Cancel Comment</button>
                 <i class="material-icons md-18 md-dark">comment</i>
                 <span ng-click="showComments()" class="flex-row center" style="cursor: pointer">
                   <small count="{{post.comments.length}}" when="{'0': 'No Comments', '1': '1 Comment', 'other': '{{post.comments.length}} Comments'}">{{post.comments.length}}</small>
@@ -70,11 +70,11 @@
               </div>
             </div>
           </div>
-          <form class="commentCard centered" ng-class="{'fadeInDown': newComment.visible, 'fadeOutUp': !newComment.visible}" ng-show="newComment.visible" id="newComment" ng-submit="postComment(newComment)">
+          <form class="commentCard centered" ng-class="{'fadeInDown': newComment.visible, 'fadeOutUp': !newComment.visible}" ng-show="post.newComment.visible" id="newComment" ng-submit="postComment(post)">
             <label for="">Author</label>
-            <input type="text" name="author" value="">
+            <input type="text" name="author" value="" ng-model="post.newComment.author">
             <label for="">Comment</label>
-            <textarea name="comment" rows="4" cols="40"></textarea>
+            <textarea name="content" rows="4" cols="40" ng-model="post.newComment.content"></textarea>
             <button class="theme-primary" type="submit" name="postComment" style="margin-top: 16px">Add Comment</button>
           </form>
         </div>

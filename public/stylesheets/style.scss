@@ -181,7 +181,7 @@ label {
   margin-bottom: 16px;
   position: relative;
   z-index: 4;
-  &:first-child {
+  &:nth-child(0) {
     margin-top: 24px;
   }
   .post-image {
@@ -284,6 +284,10 @@ select {
 }
 
 // Unique Elements
+
+#allPosts {
+  margin-top: 24px;
+}
 
 #newPost {
   @include pamphlet;

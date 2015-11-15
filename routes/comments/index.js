@@ -11,7 +11,24 @@ router.route('/')
   });
 })
 .post(function (req, res) {
-  // POST to comments...
+  console.log(req.body);
+  comments.insert(req.body).on('complete', function(err, comment){
+    if(err){
+      throw new Error("Error in POST to route /comments: ", err);
+      res.status(500).send("Error in POST to route /comments: ", err)
+    }
+    res.json(comment);
+  });
+});
+
+router.route('/:postId')
+.get(function(req,res){
+  comments.find({ 'post_id': req.params.postId }).then(function(err, comments){
+    if(err){
+      res.status(500).send("Error in GET to /:postId: ", err);
+    }
+    res.json(comments);
+  });
 })
 
 module.exports = router;

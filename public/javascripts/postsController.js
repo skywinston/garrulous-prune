@@ -10,14 +10,36 @@ var app = angular.module('redditClone', ['ngAnimate']);
 
 app.controller('postsController', function($scope, $http){
   $http.get('/api/1/posts').then(function(response){
-    console.log(response.data);
     $scope.posts = response.data;
   });
+
+  var postTemplate = {
+    visible: false,
+    position: 0,
+    votes: 0,
+    newComment: {
+      visible: false,
+      author: '',
+      content: ''
+    },
+    comments: []
+  };
+
+  var commentTemplate = {
+    visible: false,
+    author: '',
+    content: ''
+  };
 
   $scope.newPost = {
     visible: false,
     position: 0,
     votes: 0,
+    newComment: {
+      visible: false,
+      author: '',
+      content: ''
+    },
     comments: []
   };
 
@@ -41,7 +63,13 @@ app.controller('postsController', function($scope, $http){
       $scope.newPost = {
         visible: false,
         position: 0,
-        votes: 0
+        votes: 0,
+        newComment: {
+          visible: false,
+          author: '',
+          content: ''
+        },
+        comments: []
       };
     });
   }
@@ -70,26 +98,25 @@ app.controller('postsController', function($scope, $http){
     });
   }
 
-  $scope.newComment = {
-    visible: false,
-    author: '',
-    comment: ''
+  $scope.newCommentForm = function(newComment){
+    newComment.visible = true;
   }
 
-  $scope.newCommentForm = function(){
-    $scope.newComment.visible = true;
-
+  $scope.cancelComment = function (newComment) {
+    newComment.visible = false;
   }
 
-  $scope.cancelComment = function () {
-    $scope.newComment.visible = false;
-  }
-
-  $scope.postComment = function(newComment){
-    $scope.newComment.date = moment();
-    $http.post('/api/1/comments', newComment).then(function(response){
-      console.log(response);
-    })
+  $scope.postComment = function(post){
+    post.newComment.date = moment();
+    post.newComment.visible = false;
+    post.newComment.post_id = post._id;
+    $http.post('/api/1/comments', post.newComment).then(function(response){
+      post.comments.push(response.data);
+      post.newComment.author = '';
+      post.newComment.content = '';
+      post.newComment.post_id = '';
+      post.newComment.date = '';
+    });
   }
 
 });
