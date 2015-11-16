@@ -17,7 +17,21 @@
   <body ng-controller="postsController">
     <div class="appnav">
       <h3 class="logo">Shreddit</h3>
-      <button type="button" name="button" ng-click="providePostForm()"><i class="material-icons">add</i>New Post</button>
+      <button
+        type="button"
+        name="button"
+        ng-click="providePostForm()">
+        <i class="material-icons">add</i>New Post
+      </button>
+      <div class="searchPosts flex-row center">
+        <i class="material-icons">search</i>
+        <input
+          type="text"
+          name="searchPosts"
+          value=""
+          ng-model="searchPosts"
+          placeholder="Search Posts" />
+      </div>
     </div>
 
     <div class="container flex-col"> <!-- New Post Form BEGIN -->
@@ -137,8 +151,8 @@
       </form> <!-- new post form END -->
 
       <div id="allPosts" class="flex-col center">
-        <div ng-repeat="post in posts | orderBy: sortMethod">
-          <div class="post flex-row center">
+        <div class="animated" ng-repeat="post in posts | filter: searchPosts | orderBy: sortMethod">
+          <div class="post flex-row center animated">
             <h3 class='post-position'>{{$index+1}}</h3>
             <div id="vote-buttons" class="flex-col center">
               <i class="material-icons" ng-click="upvote(post)">keyboard_arrow_up</i>

@@ -193,6 +193,9 @@ label {
   &:nth-child(0) {
     margin-top: 24px;
   }
+  &:ng-leave {
+    animation: zoomOut 1s;
+  }
   .post-image {
     width: 200px;
     height: 150px;
@@ -356,6 +359,24 @@ select {
   }
 }
 
+.searchPosts {
+  height: 40px;
+  width: 256px;
+  border-radius: 40px;
+  background-color: $materialPaper;
+  border: 1px solid #0288d1;
+  i {
+    color: #757575;
+    margin-left: 12px;
+  }
+  input {
+    color: #757575;
+    font-size: 16px;
+    border: none;
+    outline: none;
+  }
+}
+
 // Animations
 
 .animated {
@@ -421,4 +442,86 @@ select {
 .fadeOut {
   -webkit-animation-name: fadeOut;
   animation-name: fadeOut;
+}
+
+@-webkit-keyframes zoomOut {
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.zoomOut {
+  -webkit-animation-name: zoomOut;
+  animation-name: zoomOut;
+}
+
+@-webkit-keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.zoomIn {
+  -webkit-animation-name: zoomIn;
+  animation-name: zoomIn;
+}
+
+// Transitions
+.animated.ng-leave {
+  animation: zoomOut .3s;
+  transition: all .3s;
+}
+
+.animated.ng-enter {
+  animation: zoomIn .3s;
+  transition: all .3s;
+}
+
+.animated.ng-move,
+.animated.ng-move-active {
+  transition: all .3s ease-in-out;
 }

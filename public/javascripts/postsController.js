@@ -33,6 +33,7 @@ app.controller('postsController', function($scope, $http){
   };
 
   $scope.sortMethod = '-votes';
+  $scope.searchPosts = '';
 
   $scope.newPost = {
     visible: false,
@@ -105,11 +106,6 @@ app.controller('postsController', function($scope, $http){
         throw new Error('DB update failed!');
       }
     });
-    // $scope.posts.forEach(function(post){
-    //   if(post._id === clickedPost._id){
-    //     post.votes--;
-    //   }
-    // });
   }
 
   $scope.newCommentForm = function(newComment){
