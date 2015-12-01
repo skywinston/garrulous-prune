@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="stylesheets/selectize.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="stylesheets/style.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
@@ -139,7 +140,7 @@
           for="tags"
           class="flex-row right tags-container center"> Tags
           <i class="material-icons">label</i>
-          <select name="tags" id="tags" ng-model="newPost.tags"></select>
+          <select name="tags" id="tags" ng-model="postTags"></select>
         </label>
 
         <div class="flex-row right btn-group">
@@ -181,15 +182,15 @@
                 <i class="material-icons md-18 md-dark">comment</i>
                 <span ng-click="post.commentsVisible = !post.commentsVisible" class="flex-row center" style="cursor: pointer">
                   <small><ng-pluralize count="post.comments.length" when="{'0': 'No Comments', '1': '1 Comment', 'other': '{{post.comments.length}} Comments'}"><ng-pluralize></small>
-                  <i class="material-icons" ng-hide="post.commentsVisible">arrow_drop_down</i>
-                  <i class="material-icons" ng-show="post.commentsVisible">arrow_drop_up</i>
+                  <i ng-if="post.comments.length" class="material-icons" ng-hide="post.commentsVisible">arrow_drop_down</i>
+                  <i ng-if="post.comments.length" class="material-icons" ng-show="post.commentsVisible">arrow_drop_up</i>
                 </span>
               </div>
             </div>
           </div>
           <div class="allComments flex-col">
             <div class="comment" ng-repeat="comment in post.comments" ng-show="post.commentsVisible" ng-hide="!posts.commentsVisible">
-              <h5>{{comment.author}} <span class="text-secondary">on {{comment.date}}</span></h5>
+              <h5>{{comment.author}} <span class="text-secondary">{{comment.date}}</span></h5>
               <p>
                 {{comment.content}}
               </p>

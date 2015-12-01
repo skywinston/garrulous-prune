@@ -45,11 +45,12 @@ app.controller('postsController', function($scope, $http){
       content: ''
     },
     comments: [],
-    tags: null,
     commentsVisible: false
   };
 
   $scope.posts = [];
+
+  $scope.postTags = [];
 
   var testTags = [
     {id: 1, title: "Nature"},
@@ -76,29 +77,40 @@ app.controller('postsController', function($scope, $http){
 
   $scope.createPost = function(newPost){
     // See if we're getting the tags from the Selectize multi-select
+    console.log(newPost);
+    console.log($scope.postTags);
+
+    var postId;
+    var tagIds;
 
     if($scope.newPost.$valid){
       console.log("Valid!");
     } else {
       console.log("Not valid!");
     }
-    console.log(newPost);
     $scope.newPost.date = moment();
-    $http.post('/api/1/posts', newPost).then(function(response){
-      response.data.date = moment(response.data.date).fromNow();
-      $scope.posts.push(response.data);
-      $scope.newPost = {
-        visible: false,
-        position: 0,
-        votes: 0,
-        newComment: {
+    $http.post('/api/1/posts', newPost)
+      .then(function(response){
+        postId = response.data._id;
+        response.data.date = moment(response.data.date).fromNow();
+        $scope.posts.push(response.data);
+        $scope.newPost = {
           visible: false,
-          author: '',
-          content: ''
-        },
-        comments: []
-      };
-    });
+          position: 0,
+          votes: 0,
+          newComment: {
+            visible: false,
+            author: '',
+            content: ''
+          },
+          comments: []
+        };
+        return $http.post('/api/1/tags', $scope.postTags);
+      })
+      .then(function(newlyCreatedTags){
+        console.log(newlyCreatedTags);
+        console.log(newlyCreatedTags.data);
+      });
   }
 
   $scope.upvote = function(clickedPost){
