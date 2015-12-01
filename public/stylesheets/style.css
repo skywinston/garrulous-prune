@@ -254,6 +254,27 @@ select {
   width: 128px;
   margin-left: 24px; }
 
+.tags-container {
+  margin-top: 16px; }
+
+.selectize-control > .selectize-input {
+  width: 512px;
+  text-align: left;
+  border: 2px solid #BDBDBD;
+  border-radius: 0px;
+  background-color: #FAFAFA; }
+
+.selectize-dropdown-content {
+  text-align: left; }
+
+.selectize-control.multi .selectize-input > div.item {
+  cursor: pointer;
+  margin: 0 3px 3px 0;
+  padding: 2px 6px;
+  background: #03a9f4;
+  border-radius: 2px;
+  color: white; }
+
 #allPosts {
   margin-top: 24px; }
 
@@ -408,4 +429,4 @@ select {
 
 .animated.ng-move,
 .animated.ng-move-active {
-  transition: all .3s ease-in-out; }
+  transition: all .3s; }

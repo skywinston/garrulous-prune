@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html ng-app="redditClone">
   <head>
+    <meta charset="utf-8">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,500,400italic,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="stylesheets/selectize.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="stylesheets/style.css" media="screen" title="no title" charset="utf-8">
-    <meta charset="utf-8">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.1/angular-animate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
@@ -131,6 +134,12 @@
             ng-class="{'text-danger': newPostForm.description.$error.required && newPostForm.description.$touched && !newPostForm.description.$dirty}"
             required>
           </textarea>
+        </label>
+        <label
+          for="tags"
+          class="flex-row right tags-container center"> Tags
+          <i class="material-icons">label</i>
+          <select name="tags" id="tags" ng-model="newPost.tags"></select>
         </label>
 
         <div class="flex-row right btn-group">

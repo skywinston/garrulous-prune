@@ -45,12 +45,26 @@ app.controller('postsController', function($scope, $http){
       content: ''
     },
     comments: [],
+    tags: null,
     commentsVisible: false
   };
 
   $scope.posts = [];
 
+  var testTags = [
+    {id: 1, title: "Nature"},
+    {id: 2, title: "Trees"},
+    {id: 3, title: "Water"},
+  ];
+
   $scope.providePostForm = function(){
+    $('#tags').selectize({
+      maxItems: 10,
+      create: true,
+      valueField: 'title',
+      labelField: 'title',
+      options: testTags,
+    });
     $scope.newPost.visible = true;
     document.getElementById('title').focus();
   }
@@ -61,6 +75,8 @@ app.controller('postsController', function($scope, $http){
   }
 
   $scope.createPost = function(newPost){
+    // See if we're getting the tags from the Selectize multi-select
+
     if($scope.newPost.$valid){
       console.log("Valid!");
     } else {
