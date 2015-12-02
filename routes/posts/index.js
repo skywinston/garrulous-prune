@@ -4,6 +4,8 @@ var moment = require('moment');
 var db = require('monk')('localhost/reddit-clone');
 var posts = db.get('posts');
 var comments = db.get('comments');
+var tags = db.get('tags');
+var tagging = db.get('tagging');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -23,7 +25,19 @@ router.get('/', function(req, res, next) {
     });
     return Promise.all(promises);
   }).then(function(){
-    res.json(postsPresenter.posts);
+    // console.log(postsPresenter.posts);
+    var getTagsPerPost = postsPresenter.posts.map(function(post){
+      return tagging.find({post_id: post._id.toString()}).then(function(taggingsWithPostId){
+        var tagLookup = taggingsWithPostId.map(function(taggingObj){
+          return tags.findOne({_id: taggingObj.tag_id.toString()}).then(function(tagsPerPost){
+            post.tags.push(tagsPerPost);
+          });
+        });
+      });
+    });
+    Promise.all(getTagsPerPost).then(function(stuff){
+      res.json(postsPresenter);
+    });
   });
 });
 

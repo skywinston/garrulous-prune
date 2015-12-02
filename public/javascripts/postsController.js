@@ -1,16 +1,20 @@
 var app = angular.module('redditClone', ['ngAnimate']);
-// app.config(function($stateProvider, $urlRouterProvider){
-//   $urlRouterProvider.otherwise('/posts');
-//   $stateProvider
-//   .state('posts', {
-//     url: '/posts',
-//     templateUrl: 'partials/posts.html'
-//   });
-// });
+  // app.config(function($stateProvider, $urlRouterProvider){
+  //   $urlRouterProvider.otherwise('/posts');
+  //   $stateProvider
+  //   .state('posts', {
+  //     url: '/',
+  //     templateUrl: 'partials/posts.html'
+  //   });
+  // });
 
 app.controller('postsController', function($scope, $http){
   $http.get('/api/1/posts').then(function(response){
-    $scope.posts = response.data;
+    $scope.posts = response.data.posts;
+  });
+
+  $http.get('/api/1/tags').then(function(response){
+    $scope.tags = response.data;
   });
 
   var postTemplate = {

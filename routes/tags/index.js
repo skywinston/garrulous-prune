@@ -5,8 +5,10 @@ var posts = db.get('posts');
 var tags = db.get('tags');
 
 router.get('/', function(req, res){
-  console.log(req.body);
-})
+  tags.find({}).then(function(allTags){
+    res.json(allTags);
+  });
+});
 
 router.post('/', function(req, res){
   var tagsToAdd = req.body.map(function(tag){

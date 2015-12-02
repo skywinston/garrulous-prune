@@ -205,6 +205,11 @@
           </form>
         </div>
       </div>
+      <div ui-view="tags" class="flex-col right">
+        <ul>
+          <li ng-repeat="tag in tags"><ui-sref="">{{tag.title}}<ui-sref></li>
+        </ul>
+      </div>
     </div>
   </body>
 </html>
