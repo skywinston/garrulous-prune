@@ -23,6 +23,7 @@ app.controller('postsController', function($scope, $http){
       content: ''
     },
     comments: [],
+    tags: [],
     commentsVisible: false
   };
 
@@ -45,6 +46,7 @@ app.controller('postsController', function($scope, $http){
       content: ''
     },
     comments: [],
+    tags: [],
     commentsVisible: false
   };
 
@@ -76,24 +78,38 @@ app.controller('postsController', function($scope, $http){
   }
 
   $scope.createPost = function(newPost){
-    // See if we're getting the tags from the Selectize multi-select
-    console.log(newPost);
-    console.log($scope.postTags);
 
+    var newlyCreatedPost;
     var postId;
     var tagIds;
 
+    // Form Validations?
     if($scope.newPost.$valid){
       console.log("Valid!");
     } else {
       console.log("Not valid!");
     }
+
     $scope.newPost.date = moment();
     $http.post('/api/1/posts', newPost)
       .then(function(response){
         postId = response.data._id;
         response.data.date = moment(response.data.date).fromNow();
-        $scope.posts.push(response.data);
+        newlyCreatedPost = response.data;
+        console.log("What does the newlyCreatedPost looks like?", newlyCreatedPost);
+        return $http.post('/api/1/tags', $scope.postTags);
+      })
+      .then(function(newlyCreatedTags){
+        console.log("Newly Created Tag Objs", newlyCreatedTags.data);
+        newlyCreatedPost.tags = newlyCreatedTags.data;
+        var addTaggings = newlyCreatedTags.data.map(function(tagObj){
+          return {post_id: postId, tag_id: tagObj._id};
+        });
+        return $http.post('/api/1/tagging', addTaggings);
+      })
+      .then(function(newlyCreatedTaggings){
+        $scope.posts.push(newlyCreatedPost);
+        // resest the newPost object in scope;
         $scope.newPost = {
           visible: false,
           position: 0,
@@ -103,13 +119,9 @@ app.controller('postsController', function($scope, $http){
             author: '',
             content: ''
           },
-          comments: []
+          comments: [],
+          tags: [],
         };
-        return $http.post('/api/1/tags', $scope.postTags);
-      })
-      .then(function(newlyCreatedTags){
-        console.log(newlyCreatedTags);
-        console.log(newlyCreatedTags.data);
       });
   }
 

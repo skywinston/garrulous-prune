@@ -159,10 +159,13 @@ label {
     color: #9E9E9E;
     font-size: 24px;
     font-weight: 300; }
+  .post .post-details {
+    max-width: 450px; }
   .post h2 {
     font-weight: 500;
     margin-top: 0px;
-    margin-bottom: 16px; }
+    margin-bottom: 16px;
+    font-size: 20px; }
   .post p {
     font-size: 14px;
     color: #757575; }
@@ -267,12 +270,11 @@ select {
 .selectize-dropdown-content {
   text-align: left; }
 
-.selectize-control.multi .selectize-input > div.item {
+.selectize-control.multi .selectize-input > div {
   cursor: pointer;
   margin: 0 3px 3px 0;
   padding: 2px 6px;
   background: #03a9f4;
-  border-radius: 2px;
   color: white; }
 
 #allPosts {

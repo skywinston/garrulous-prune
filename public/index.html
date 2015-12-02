@@ -6,8 +6,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="stylesheets/selectize.css" media="screen" title="no title" charset="utf-8">
-    <link rel="stylesheet" href="stylesheets/style.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.min.css">
+    <link rel="stylesheet" href="stylesheets/style.css" media="screen" title="no title" charset="utf-8">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.min.js"></script>
@@ -170,7 +170,7 @@
               <i class="material-icons" ng-click="downvote(post)">keyboard_arrow_down</i>
             </div>
             <div class='post-image' style="background: url({{post.imageURL}}) no-repeat center top; background-size: cover" alt=""></div>
-            <div class="flex-col stretch">
+            <div class="flex-col stretch post-details">
               <h2>{{post.title}}</h2>
               <small>Posted <strong>{{post.date}}</strong> by <strong>{{post.author}}</strong></small>
               <p>

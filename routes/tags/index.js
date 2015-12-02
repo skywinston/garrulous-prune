@@ -9,13 +9,13 @@ router.get('/', function(req, res){
 })
 
 router.post('/', function(req, res){
-  console.log("POST to /tags", req.body);
   var tagsToAdd = req.body.map(function(tag){
-    return tags.insert({title: tag});
+    return tags.findAndModify({title: tag}, {title: tag}, {upsert: true});
   });
   Promise.all(tagsToAdd).then(function(newlyCreatedTags){
-    console.log(newlyCreatedTags);
-  })
-})
+    console.log("Newly Created Tags", newlyCreatedTags);
+    res.json(newlyCreatedTags);
+  });
+});
 
 module.exports = router;
