@@ -1,0 +1,187 @@
+<div class="appnav">
+  <h3 class="logo">Shreddit</h3>
+  <button
+    type="button"
+    name="button"
+    ng-click="providePostForm()">
+    <i class="material-icons">add</i>New Post
+  </button>
+  <div class="searchPosts flex-row center">
+    <i class="material-icons">search</i>
+    <input
+      type="text"
+      name="searchPosts"
+      value=""
+      ng-model="searchPosts"
+      placeholder="Search Posts" />
+  </div>
+</div>
+
+<div class="container flex-col"> <!-- New Post Form BEGIN -->
+  <form id='newPostForm'
+        name='newPostForm'
+        ng-submit="createPost(newPost)"
+        class="flex-col centered animated"
+        ng-show="newPost.visible"
+        ng-class="{'fadeInDown': newPost.visible, 'fadeOutUp':!newPost.visible}"
+        novalidate="novalidate">
+
+    <h1>New Post</h1>
+
+    <span
+      class="right"
+      ng-show="newPostForm.title.$error.required && newPostForm.title.$touched && !newPostForm.title.$dirty"
+      ng-class="{'text-danger': newPostForm.title.$invalid || (newPostForm.title.$touched && !newPostForm.title.$dirty)}">Title is required.
+    </span>
+    <label
+      for="title"
+      ng-class="{'text-danger': newPostForm.title.$error.required && newPostForm.title.$touched && !newPostForm.title.$dirty}"
+      class='flex-row right'> Title
+      <i class="material-icons"
+      ng-class="{'text-danger': newPostForm.title.$error.required && newPostForm.title.$touched && !newPostForm.title.$dirty}"
+      >book</i>
+      <input
+      id='title'
+      type="text"
+      name="title"
+      value=""
+      ng-model="newPost.title"
+      ng-class="{'text-danger': newPostForm.title.$error.required && newPostForm.title.$touched && !newPostForm.title.$dirty}"
+      required/>
+    </label>
+
+    <span
+      class="right"
+      ng-show="newPostForm.author.$error.required && newPostForm.author.$touched && !newPostForm.author.$dirty"
+      ng-class="{'text-danger': newPostForm.author.$invalid || (newPostForm.author.$touched && !newPostForm.author.$dirty)}">Author is required.
+    </span>
+    <label
+      for="author"
+      ng-class="{'text-danger': newPostForm.author.$error.required && newPostForm.author.$touched && !newPostForm.author.$dirty}"
+      class="flex-row right"> Author
+      <i class="material-icons"
+      ng-class="{'text-danger': newPostForm.author.$error.required && newPostForm.author.$touched && !newPostForm.author.$dirty}"
+      >face</i>
+      <input
+        id="author"
+        type="text"
+        name="author"
+        ng-minlength="1"
+        ng-model="newPost.author"
+        ng-class="{'text-danger': newPostForm.author.$error.required && newPostForm.author.$touched && !newPostForm.author.$dirty}"
+        required/>
+    </label>
+
+    <span
+      class="right"
+      ng-show="newPostForm.imageURL.$error.required && newPostForm.imageURL.$touched && !newPostForm.imageURL.$dirty"
+      ng-class="{'text-danger': newPostForm.imageURL.$invalid || (newPostForm.imageURL.$touched && !newPostForm.imageURL.$dirty)}">Image URL is required.
+    </span>
+    <label
+      for="imageURL"
+      class="flex-row right"
+      ng-class="{'text-danger': newPostForm.imageURL.$error.required && newPostForm.imageURL.$touched && !newPostForm.imageURL.$dirty}">Image URL
+      <i class="material-icons"
+      ng-class="{'text-danger': newPostForm.imageURL.$error.required && newPostForm.imageURL.$touched && !newPostForm.imageURL.$dirty}"
+      >photo_camera</i>
+      <input
+        id="imageURL"
+        type="url"
+        name="imageURL"
+        value=""
+        ng-model="newPost.imageURL"
+        ng-class="{'text-danger': newPostForm.imageURL.$error.required && newPostForm.imageURL.$touched && !newPostForm.imageURL.$dirty}"
+        required />
+    </label>
+
+    <span
+      class="right"
+      ng-show="newPostForm.description.$error.required && newPostForm.description.$touched && !newPostForm.description.$dirty"
+      ng-class="{'text-danger': newPostForm.description.$invalid || (newPostForm.description.$touched && !newPostForm.description.$dirty)}">Description is required.
+    </span>
+    <label
+      for="description"
+      ng-class="{'text-danger': newPostForm.description.$error.required && newPostForm.description.$touched && !newPostForm.description.$dirty}"
+      class="flex-row right"> Description
+      <i class="material-icons"
+      ng-class="{'text-danger': newPostForm.description.$error.required && newPostForm.description.$touched && !newPostForm.description.$dirty}"
+      >description</i>
+      <textarea
+        id="description"
+        name="description"
+        value=""
+        ng-model="newPost.description"
+        ng-class="{'text-danger': newPostForm.description.$error.required && newPostForm.description.$touched && !newPostForm.description.$dirty}"
+        required>
+      </textarea>
+    </label>
+    <label
+      for="tags"
+      class="flex-row right tags-container center"> Tags
+      <i class="material-icons">label</i>
+      <select name="tags" id="tags" ng-model="postTags"></select>
+    </label>
+
+    <div class="flex-row right btn-group">
+      <button
+        class="theme-primary"
+        type="button" name="cancel"
+        ng-click="newPost.visible = false">
+        Cancel
+      </button>
+
+      <button
+        ng-disabled="newPostForm.$invalid"
+        type="submit"
+        name="createPost"
+        >Create Post
+      </button>
+    </div>
+  </form> <!-- new post form END -->
+
+  <div id="allPosts" class="flex-col center">
+    <div class="animated" ng-repeat="post in posts | filter: searchPosts | orderBy: sortMethod">
+      <div class="post flex-row center animated">
+        <h3 class='post-position'>{{$index+1}}</h3>
+        <div id="vote-buttons" class="flex-col center">
+          <i class="material-icons" ng-click="upvote(post)">keyboard_arrow_up</i>
+          <h3 ng-class="{'text-success': post.votes > 0, 'text-danger': post.votes < 0}">{{post.votes}}</h3>
+          <i class="material-icons" ng-click="downvote(post)">keyboard_arrow_down</i>
+        </div>
+        <div class='post-image' style="background: url({{post.imageURL}}) no-repeat center top; background-size: cover" alt=""></div>
+        <div class="flex-col stretch post-details">
+          <h2>{{post.title}}</h2>
+          <small>Posted <strong>{{post.date}}</strong> by <strong>{{post.author}}</strong></small>
+          <p>
+            {{post.description}}
+          </p>
+          <div class="flex-row center commentNav">
+            <button ng-hide="post.newComment.visible" ng-click="newCommentForm(post.newComment)" class="theme-primary" type="button" name="addComment">Add Comment</button>
+            <button ng-show="post.newComment.visible" ng-click="cancelComment(post.newComment)" class="theme-danger" type="button" name="cancelComment">Cancel Comment</button>
+            <i class="material-icons md-18 md-dark">comment</i>
+            <span ng-click="post.commentsVisible = !post.commentsVisible" class="flex-row center" style="cursor: pointer">
+              <small><ng-pluralize count="post.comments.length" when="{'0': 'No Comments', '1': '1 Comment', 'other': '{{post.comments.length}} Comments'}"><ng-pluralize></small>
+              <i ng-if="post.comments.length" class="material-icons" ng-hide="post.commentsVisible">arrow_drop_down</i>
+              <i ng-if="post.comments.length" class="material-icons" ng-show="post.commentsVisible">arrow_drop_up</i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="allComments flex-col">
+        <div class="comment" ng-repeat="comment in post.comments" ng-show="post.commentsVisible" ng-hide="!posts.commentsVisible">
+          <h5>{{comment.author}} <span class="text-secondary">{{comment.date}}</span></h5>
+          <p>
+            {{comment.content}}
+          </p>
+        </div>
+      </div>
+      <form class="commentCard centered" ng-class="{'fadeInDown': post.newComment.visible, 'fadeOutUp': !post.newComment.visible}" ng-show="post.newComment.visible" id="newComment" ng-submit="postComment(post)" novalidate>
+        <label for="">Author</label>
+        <input type="text" name="author" value="" ng-model="post.newComment.author">
+        <label for="">Comment</label>
+        <textarea name="content" rows="4" cols="40" ng-model="post.newComment.content"></textarea>
+        <button class="theme-primary" type="submit" name="postComment" style="margin-top: 16px">Add Comment</button>
+      </form>
+    </div>
+  </div>
+</div>
