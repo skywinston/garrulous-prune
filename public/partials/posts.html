@@ -139,49 +139,66 @@
     </div>
   </form> <!-- new post form END -->
 
-  <div id="allPosts" class="flex-col center">
-    <div class="animated" ng-repeat="post in posts | filter: searchPosts | orderBy: sortMethod">
-      <div class="post flex-row center animated">
-        <h3 class='post-position'>{{$index+1}}</h3>
-        <div id="vote-buttons" class="flex-col center">
-          <i class="material-icons" ng-click="upvote(post)">keyboard_arrow_up</i>
-          <h3 ng-class="{'text-success': post.votes > 0, 'text-danger': post.votes < 0}">{{post.votes}}</h3>
-          <i class="material-icons" ng-click="downvote(post)">keyboard_arrow_down</i>
-        </div>
-        <div class='post-image' style="background: url({{post.imageURL}}) no-repeat center top; background-size: cover" alt=""></div>
-        <div class="flex-col stretch post-details">
-          <h2>{{post.title}}</h2>
-          <small>Posted <strong>{{post.date}}</strong> by <strong>{{post.author}}</strong></small>
-          <p>
-            {{post.description}}
-          </p>
-          <div class="flex-row center commentNav">
-            <button ng-hide="post.newComment.visible" ng-click="newCommentForm(post.newComment)" class="theme-primary" type="button" name="addComment">Add Comment</button>
-            <button ng-show="post.newComment.visible" ng-click="cancelComment(post.newComment)" class="theme-danger" type="button" name="cancelComment">Cancel Comment</button>
-            <i class="material-icons md-18 md-dark">comment</i>
-            <span ng-click="post.commentsVisible = !post.commentsVisible" class="flex-row center" style="cursor: pointer">
-              <small><ng-pluralize count="post.comments.length" when="{'0': 'No Comments', '1': '1 Comment', 'other': '{{post.comments.length}} Comments'}"><ng-pluralize></small>
-              <i ng-if="post.comments.length" class="material-icons" ng-hide="post.commentsVisible">arrow_drop_down</i>
-              <i ng-if="post.comments.length" class="material-icons" ng-show="post.commentsVisible">arrow_drop_up</i>
-            </span>
+  <!-- REGION Posts & Tags BEGIN -->
+  <div class="flex-row">
+    <div class="stretch">
+    <div id="allPosts" class="flex-col center">
+      <div class="animated" ng-repeat="post in posts | filter: searchPosts | orderBy: sortMethod">
+        <div class="post flex-row center animated">
+          <h3 class='post-position'>{{$index+1}}</h3>
+          <div id="vote-buttons" class="flex-col center">
+            <i class="material-icons" ng-click="upvote(post)">keyboard_arrow_up</i>
+            <h3 ng-class="{'text-success': post.votes > 0, 'text-danger': post.votes < 0}">{{post.votes}}</h3>
+            <i class="material-icons" ng-click="downvote(post)">keyboard_arrow_down</i>
+          </div>
+          <div class='post-image' style="background: url({{post.imageURL}}) no-repeat center top; background-size: cover" alt=""></div>
+          <div class="flex-col stretch post-details">
+            <h2>{{post.title}}</h2>
+            <small>Posted <strong>{{post.date}}</strong> by <strong>{{post.author}}</strong></small>
+            <p>
+              {{post.description}}
+            </p>
+            <ul class="post-tags flex-row">
+              <li class="post-tag" ng-repeat="tag in post.tags">{{tag.title}}</li>
+            </ul>
+            <div class="flex-row center commentNav">
+              <button ng-hide="post.newComment.visible" ng-click="newCommentForm(post.newComment)" class="theme-primary" type="button" name="addComment">Add Comment</button>
+              <button ng-show="post.newComment.visible" ng-click="cancelComment(post.newComment)" class="theme-danger" type="button" name="cancelComment">Cancel Comment</button>
+              <i class="material-icons md-18 md-dark">comment</i>
+              <span ng-click="post.commentsVisible = !post.commentsVisible" class="flex-row center" style="cursor: pointer">
+                <small><ng-pluralize count="post.comments.length" when="{'0': 'No Comments', '1': '1 Comment', 'other': '{{post.comments.length}} Comments'}"><ng-pluralize></small>
+                <i ng-if="post.comments.length" class="material-icons" ng-hide="post.commentsVisible">arrow_drop_down</i>
+                <i ng-if="post.comments.length" class="material-icons" ng-show="post.commentsVisible">arrow_drop_up</i>
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="allComments flex-col">
-        <div class="comment" ng-repeat="comment in post.comments" ng-show="post.commentsVisible" ng-hide="!posts.commentsVisible">
-          <h5>{{comment.author}} <span class="text-secondary">{{comment.date}}</span></h5>
-          <p>
-            {{comment.content}}
-          </p>
+        <div class="allComments flex-col">
+          <div class="comment" ng-repeat="comment in post.comments" ng-show="post.commentsVisible" ng-hide="!posts.commentsVisible">
+            <h5>{{comment.author}} <span class="text-secondary">{{comment.date}}</span></h5>
+            <p>
+              {{comment.content}}
+            </p>
+          </div>
         </div>
+        <form class="commentCard centered" ng-class="{'fadeInDown': post.newComment.visible, 'fadeOutUp': !post.newComment.visible}" ng-show="post.newComment.visible" id="newComment" ng-submit="postComment(post)" novalidate>
+          <label for="">Author</label>
+          <input type="text" name="author" value="" ng-model="post.newComment.author">
+          <label for="">Comment</label>
+          <textarea name="content" rows="4" cols="40" ng-model="post.newComment.content"></textarea>
+          <button class="theme-primary" type="submit" name="postComment" style="margin-top: 16px">Add Comment</button>
+        </form>
       </div>
-      <form class="commentCard centered" ng-class="{'fadeInDown': post.newComment.visible, 'fadeOutUp': !post.newComment.visible}" ng-show="post.newComment.visible" id="newComment" ng-submit="postComment(post)" novalidate>
-        <label for="">Author</label>
-        <input type="text" name="author" value="" ng-model="post.newComment.author">
-        <label for="">Comment</label>
-        <textarea name="content" rows="4" cols="40" ng-model="post.newComment.content"></textarea>
-        <button class="theme-primary" type="submit" name="postComment" style="margin-top: 16px">Add Comment</button>
-      </form>
     </div>
+    </div> <!--End of Stretch Column-->
+    <!-- TAGS -->
+    <!-- <div class="flex-col tag-panel">
+      <div class="tag-container">
+        <h1>Tags</h1>
+        <ul class=tag-list>
+          <li ng-repeat="tag in tags" class="tag-item"><a ui-sref="posts.tag({id: tag._id})">{{tag.title}}</a></li>
+        </ul>
+      </div>
+    </div> -->
   </div>
 </div>

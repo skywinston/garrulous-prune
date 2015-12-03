@@ -5,7 +5,10 @@ var app = angular.module('redditClone', ['ngAnimate', 'ui.router'])
       url: '/',
       templateUrl: 'partials/posts.html',
       controller: 'postsController'
-    });
+    })
+    // .state('posts.tag', {
+    //   url: '/tag/{id}'
+    // });
     $urlRouterProvider.otherwise('/');
 
     $locationProvider.html5Mode(true);
@@ -17,16 +20,19 @@ var app = angular.module('redditClone', ['ngAnimate', 'ui.router'])
 
     $http.get('/api/1/posts').then(function(response){
       $scope.posts = response.data.posts;
+      console.log(response.data.posts);
     });
 
     $http.get('/api/1/tags').then(function(response){
+      console.log("Data for tags", response.data);
+      var optsToLoad = response.data.length ? response.data : null;
       $scope.tags = response.data;
       $selectize = $('#tags').selectize({
         maxItems: 10,
         create: true,
         valueField: 'title',
         labelField: 'title',
-        options: response.data,
+        options: optsToLoad,
       });
       selectize = $selectize[0].selectize;
     });
@@ -181,4 +187,8 @@ var app = angular.module('redditClone', ['ngAnimate', 'ui.router'])
       });
     }
 
-});
+  })
+  .controller("TagsController", [function(){
+    console.log("Tag Controller Loaded!");
+    // Tag controller logic...
+  }]);

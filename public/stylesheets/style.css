@@ -90,7 +90,8 @@ label {
   align-self: flex-end; }
 
 .stretch {
-  align-self: stretch; }
+  align-self: stretch;
+  width: 100%; }
 
 .appnav {
   display: flex;
@@ -161,6 +162,13 @@ label {
     font-weight: 300; }
   .post .post-details {
     max-width: 450px; }
+  .post .post-tags ul {
+    list-style: none; }
+    .post .post-tags ul li {
+      color: white;
+      background-color: #03a9f4;
+      margin: 0 3px 3px 0;
+      padding: 4px 6px; }
   .post h2 {
     font-weight: 500;
     margin-top: 0px;
@@ -278,7 +286,8 @@ select {
   color: white; }
 
 #allPosts {
-  margin-top: 24px; }
+  margin-top: 24px;
+  margin-left: auto; }
 
 .allComments {
   position: relative;
@@ -328,6 +337,32 @@ select {
     font-size: 16px;
     border: none;
     outline: none; }
+
+.tag-panel {
+  margin-right: -24px;
+  height: 100%;
+  margin-left: auto;
+  z-index: -1;
+  width: 320px;
+  padding: 24px;
+  box-sizing: border-box;
+  box-shadow: 0px 9px 18px 0px rgba(0, 0, 0, 0.18), 0px 5px 5px 0px rgba(0, 0, 0, 0.24);
+  background-color: #fafafa;
+  flex: 0 1 auto; }
+
+ul.tag-list {
+  padding: 0px;
+  margin: 0px; }
+
+.tag-item {
+  margin: 0 3px 3px 0;
+  padding: 4px 6px;
+  background: #03a9f4;
+  border-radius: 2px;
+  color: white; }
+  .tag-item a {
+    text-decoration: none;
+    color: white; }
 
 .animated {
   -webkit-animation-duration: .4s;

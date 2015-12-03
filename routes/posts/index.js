@@ -31,11 +31,13 @@ router.get('/', function(req, res, next) {
         var tagLookup = taggingsWithPostId.map(function(taggingObj){
           return tags.findOne({_id: taggingObj.tag_id.toString()}).then(function(tagsPerPost){
             post.tags.push(tagsPerPost);
+            console.log("the post", post);
+            console.log("postPresenter Object", postsPresenter);
           });
         });
       });
     });
-    Promise.all(getTagsPerPost).then(function(stuff){
+    Promise.all(getTagsPerPost).then(function(){
       res.json(postsPresenter);
     });
   });
