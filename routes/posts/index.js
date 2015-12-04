@@ -23,7 +23,6 @@ router.get('/', function(req, res, next) {
           post.comments.push(comment);
         });
         post.date = moment(post.date).fromNow();
-        postsPresenter.posts.push(post);
       });
     });
     return Promise.all(promises);
@@ -33,8 +32,6 @@ router.get('/', function(req, res, next) {
         var tagLookup = taggingsWithPostId.map(function(taggingObj){
           return tags.findOne({_id: taggingObj.tag_id.toString()}).then(function(tagsPerPost){
             post.tags.push(tagsPerPost);
-            // console.log("the post", post);
-            // console.log("postPresenter Object", postsPresenter);
           });
         });
       });
