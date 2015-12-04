@@ -135,7 +135,7 @@ label {
   display: flex;
   flex-flow: row;
   align-items: center;
-  // position: absolute;
+  justify-content: space-between;
   z-index: 10;
   top: 0px;
   width: 100%;
@@ -159,7 +159,7 @@ label {
   background-color: #039BE5;
   box-shadow: inset 0px 0px 0px 1px rgba(41,182,246,.5);
   padding: 8px 16px;
-  margin-right: 24px;
+  margin-right: 48px;
   font-weight: 600;
   font-size: 12px;
 }
@@ -235,6 +235,14 @@ label {
     font-size: 14px;
     color: #757575;
   }
+}
+
+.tag-header {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 8px;
+  color: #424242;
 }
 
 .post-tag {

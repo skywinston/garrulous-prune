@@ -6,9 +6,7 @@ var app = angular.module('redditClone', ['ngAnimate', 'ui.router'])
       templateUrl: 'partials/posts.html',
       controller: 'postsController'
     })
-    // .state('posts.tag', {
-    //   url: '/tag/{id}'
-    // });
+    
     $urlRouterProvider.otherwise('/');
 
     $locationProvider.html5Mode(true);

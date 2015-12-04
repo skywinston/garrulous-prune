@@ -1,12 +1,7 @@
 <div class="appnav">
   <h3 class="logo">Shreddit</h3>
-  <button
-    type="button"
-    name="button"
-    ng-click="providePostForm()">
-    <i class="material-icons">add</i>New Post
-  </button>
-  <div class="searchPosts flex-row center">
+  <div class="searchPosts flex-row center centered">
+    <!-- <select class="sorter" name="sorter" ng-model="sorter"><i class="material-icons">filter_list</i></select> -->
     <i class="material-icons">search</i>
     <input
       type="text"
@@ -15,6 +10,12 @@
       ng-model="searchPosts"
       placeholder="Search Posts" />
   </div>
+  <button
+    type="button"
+    name="button"
+    ng-click="providePostForm()">
+    <i class="material-icons">add</i>New Post
+  </button>
 </div>
 
 <div class="container flex-col"> <!-- New Post Form BEGIN -->
@@ -158,8 +159,8 @@
             <p>
               {{post.description}}
             </p>
-            <ul class="post-tags flex-row">
-              <li>Tags:</li>
+            <ul class="post-tags flex-row center">
+              <li class="tag-header">Tags:</li>
               <li class="post-tag" ng-repeat="tag in post.tags">{{tag.title}}</li>
             </ul>
             <div class="flex-row center commentNav">
