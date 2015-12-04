@@ -14,7 +14,8 @@ router.get('/', function(req, res, next) {
     posts: []
   }
 
-  posts.find({}).then(function(posts){
+  posts.find({})
+  .then(function(posts){
     postsPresenter.posts = posts;
     var promises = posts.map(function (post) {
       return comments.find({ 'post_id': post._id.toString() }).then(function(comments){
@@ -26,7 +27,8 @@ router.get('/', function(req, res, next) {
       });
     });
     return Promise.all(promises);
-  }).then(function(){
+  })
+  .then(function(){
     var getTagsPerPost = postsPresenter.posts.map(function(post){
       return tagging.find({post_id: post._id.toString()}).then(function(taggingsWithPostId){
         var tagLookup = taggingsWithPostId.map(function(taggingObj){
@@ -36,9 +38,10 @@ router.get('/', function(req, res, next) {
         });
       });
     });
-    Promise.all(getTagsPerPost).then(function(){
-      res.json(postsPresenter);
-    });
+    return Promise.all(getTagsPerPost)
+  })
+  .then(function(){
+    res.json(postsPresenter);
   });
 });
 
