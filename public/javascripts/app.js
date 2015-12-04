@@ -32,6 +32,7 @@ var app = angular.module('redditClone', ['ngAnimate', 'ui.router'])
         create: true,
         valueField: 'title',
         labelField: 'title',
+        searchField: 'title',
         options: optsToLoad,
       });
       selectize = $selectize[0].selectize;
