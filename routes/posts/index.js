@@ -36,6 +36,7 @@ router.get('/', function(req, res, next) {
             post.tags.push(tagsPerPost);
           });
         });
+        return Promise.all(tagLookup);
       });
     });
     return Promise.all(getTagsPerPost)
