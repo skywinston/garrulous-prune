@@ -9,10 +9,13 @@ var tagging = db.get('tagging');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+
   var postsPresenter = {
     posts: []
   }
+
   posts.find({}).then(function(posts){
+    postsPresenter.posts = posts;
     var promises = posts.map(function (post) {
       return comments.find({ 'post_id': post._id.toString() }).then(function(comments){
         comments.forEach(function(comment){
@@ -25,14 +28,13 @@ router.get('/', function(req, res, next) {
     });
     return Promise.all(promises);
   }).then(function(){
-    // console.log(postsPresenter.posts);
     var getTagsPerPost = postsPresenter.posts.map(function(post){
       return tagging.find({post_id: post._id.toString()}).then(function(taggingsWithPostId){
         var tagLookup = taggingsWithPostId.map(function(taggingObj){
           return tags.findOne({_id: taggingObj.tag_id.toString()}).then(function(tagsPerPost){
             post.tags.push(tagsPerPost);
-            console.log("the post", post);
-            console.log("postPresenter Object", postsPresenter);
+            // console.log("the post", post);
+            // console.log("postPresenter Object", postsPresenter);
           });
         });
       });

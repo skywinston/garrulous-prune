@@ -162,13 +162,17 @@ label {
     font-weight: 300; }
   .post .post-details {
     max-width: 450px; }
-  .post .post-tags ul {
-    list-style: none; }
-    .post .post-tags ul li {
+  .post .post-tags {
+    list-style: none;
+    padding: 0px;
+    margin: 8px 0px; }
+    .post .post-tags li {
       color: white;
       background-color: #03a9f4;
       margin: 0 3px 3px 0;
-      padding: 4px 6px; }
+      padding: 4px 6px;
+      border-radius: 2px;
+      font-size: 12px; }
   .post h2 {
     font-weight: 500;
     margin-top: 0px;

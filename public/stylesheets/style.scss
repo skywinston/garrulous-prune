@@ -212,14 +212,16 @@ label {
     max-width: 450px;
   }
   .post-tags {
-    ul {
-      list-style: none;
-      li {
-        color: white;
-        background-color: $derritBlue;
-        margin: 0 3px 3px 0;
-        padding: 4px 6px;
-      }
+    list-style: none;
+    padding: 0px;
+    margin: 8px 0px;
+    li {
+      color: white;
+      background-color: $derritBlue;
+      margin: 0 3px 3px 0;
+      padding: 4px 6px;
+      border-radius: 2px;
+      font-size: 12px;
     }
   }
   h2 {
